@@ -121,5 +121,5 @@ Microsoft SQL Server ve Entity Framework Core kullanılarak veriler yönetilmekt
 ## 👩‍💻 Geliştirici
 
 **Gamze Bilge**
-- [LinkedIn Profilim](LINKEDIN_PROFIL_LINKIN)
+- [LinkedIn Profilim](https://www.linkedin.com/in/gamze-bilge1/)
 
