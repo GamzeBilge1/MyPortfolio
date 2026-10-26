@@ -1,0 +1,55 @@
+﻿
+@model MyPortfolio.DAL.Entities.Contact
+
+@{
+    ViewData["Title"] = "İletişim Bilgilerim";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">İletişim Bilgilerim</h4>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+
+                    <div class="card-header">
+                        <div class="card-title">İletişim Bilgileri</div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="mb-4">
+                            <h5>
+                                <i class="la la-phone"></i> Telefon
+                            </h5>
+                            <p>@Model.Phone1</p>
+                            <p>@Model.Phone2</p>
+                        </div>
+
+                        <hr />
+
+                        <div class="mb-4">
+                            <h5>
+                                <i class="la la-envelope"></i> E-posta
+                            </h5>
+                            <p>@Model.Email1</p>
+                            <p>@Model.Email2</p>
+                        </div>
+
+                        <hr />
+
+                        <div class="mb-3">
+                            <h5>
+                                <i class="la la-map-marker"></i> Adres
+                            </h5>
+                            <p>@Model.Address</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

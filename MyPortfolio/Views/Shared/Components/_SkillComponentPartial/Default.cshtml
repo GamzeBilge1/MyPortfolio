@@ -1,0 +1,14 @@
+﻿ @model List<MyPortfolio.DAL.Entities.Skill>
+<div class="col-six tab-full right">
+    <h3>Programlama Dilleri & Teknolojiler </h3>
+
+    <ul class="skill-bars">
+
+        @foreach(var i in Model){
+        <li>
+                <div class="progress" style="width:@(i.Value)%;"><span>@i.Value%</span></div>
+            <strong>@i.Title</strong>
+        </li>
+        }
+    </ul>
+</div>

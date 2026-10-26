@@ -1,0 +1,90 @@
+﻿@model List<MyPortfolio.DAL.Entities.Contact>
+<section id="contact" class="s-contact target-section">
+
+    <div class="overlay"></div>
+
+    <div class="row narrow section-intro">
+        <div class="col-full">
+            <h3>İletişim</h3>
+            <h1>@ViewBag.title</h1>
+
+            <p class="lead">@ViewBag.description</p>
+        </div>
+    </div>
+
+    <div class="row contact__main">
+        <div class="col-eight tab-full contact__form">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div style="color: green; margin-bottom: 20px; font-weight: bold;">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+            <form id="portfolioMessageForm" method="post" action="/Contact/SendMessage">
+                <fieldset>
+
+                    <div class="form-field">
+                        <input name="NameSurname" type="text" id="contactName"
+                               placeholder="Adınız Soyadınız" minlength="2"
+                               required aria-required="true" class="full-width">
+                    </div>
+
+                    <div class="form-field">
+                        <input name="Email" type="email" id="contactEmail"
+                               placeholder="E-posta Adresiniz"
+                               required aria-required="true" class="full-width">
+                    </div>
+
+                    <div class="form-field">
+                        <input name="Subject" type="text" id="contactSubject"
+                               placeholder="Konu" required
+                               aria-required="true" class="full-width">
+                    </div>
+
+                    <div class="form-field">
+                        <textarea name="MessageDetail" id="contactMessage"
+                                  placeholder="Mesajınız" rows="10" cols="50"
+                                  required aria-required="true" class="full-width"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                        <button type="submit" class="full-width btn--primary">Mesaj Gönder</button>
+
+                        <div class="submit-loader">
+                            <div class="text-loader">Gönderiliyor...</div>
+                            <div class="s-loader">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+          
+
+        </div>
+        <div class="col-four tab-full contact__infos">
+            <h4 class="h06">Phone</h4>
+            <p>
+                Phone: @ViewBag.phone1<br>
+                Mobile:@ViewBag.phone2<br>
+               
+            </p>
+
+            <h4 class="h06">Email</h4>
+            <p>
+                @ViewBag.email1<br>
+                @ViewBag.email2
+            </p>
+
+            <h4 class="h06">Address</h4>
+            <p>
+               @ViewBag.address
+            </p>
+        </div>
+
+    </div>
+
+</section> <!-- end s-contact -->

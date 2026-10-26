@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">İstatistikler</h4>
+
+		<div class="row">
+			<div class="col-md-3">
+				<div class="card card-stats card-warning">
+					<div class="card-body ">
+						<div class="row">
+							<div class="col-5">
+								<div class="icon-big text-center">
+									<i class="la la-users"></i>
+								</div>
+							</div>
+							<div class="col-7 d-flex align-items-center">
+								<div class="numbers">
+									<p class="card-category">Yetenek Sayısı</p>
+									<h4 class="card-title">@ViewBag.v1</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card card-stats card-success">
+					<div class="card-body ">
+						<div class="row">
+							<div class="col-5">
+								<div class="icon-big text-center">
+									<i class="la la-bar-chart"></i>
+								</div>
+							</div>
+							<div class="col-7 d-flex align-items-center">
+								<div class="numbers">
+									<p class="card-category">Toplam Mesaj</p>
+									<h4 class="card-title">@ViewBag.v2</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card card-stats card-danger">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-5">
+								<div class="icon-big text-center">
+									<i class="la la-newspaper-o"></i>
+								</div>
+							</div>
+							<div class="col-7 d-flex align-items-center">
+								<div class="numbers">
+									<p class="card-category">Okunmayanlar</p>
+									<h4 class="card-title">@ViewBag.v3</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card card-stats card-primary">
+					<div class="card-body ">
+						<div class="row">
+							<div class="col-5">
+								<div class="icon-big text-center">
+									<i class="la la-check-circle"></i>
+								</div>
+							</div>
+							<div class="col-7 d-flex align-items-center">
+								<div class="numbers">
+									<p class="card-category">Okunanlar</p>
+									<h4 class="card-title">@ViewBag.v4</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<br />
+
+	
+		
+		<div class="row mt-4">
+			<div class="col-md-6">
+				<div class="card h-100">
+					<div class="card-header">
+						<div class="card-title">Yetenek Seviyeleri</div>
+					</div>
+					<div class="card-body">
+						<div style="height: 300px;">
+							<canvas id="skillsChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="card h-100">
+					<div class="card-header">
+						<div class="card-title">Yapılacaklar Durumu</div>
+					</div>
+					<div class="card-body">
+						<div style="height: 300px;">
+							<canvas id="todoChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+		<script>
+			var skillTitles = @Html.Raw(
+				System.Text.Json.JsonSerializer.Serialize(
+					((IEnumerable<MyPortfolio.DAL.Entities.Skill>)ViewBag.Skills)
+						.Select(x => x.Title)
+				)
+			);
+
+			var skillValues = @Html.Raw(
+				System.Text.Json.JsonSerializer.Serialize(
+					((IEnumerable<MyPortfolio.DAL.Entities.Skill>)ViewBag.Skills)
+						.Select(x => x.Value)
+				)
+			);
+
+			new Chart(document.getElementById('skillsChart'), {
+				type: 'bar',
+				data: {
+					labels: skillTitles,
+					datasets: [{
+						label: 'Yetenek Seviyesi',
+						data: skillValues
+					}]
+				},
+				options: {
+					indexAxis: 'y',
+					responsive: true,
+					maintainAspectRatio: false,
+					scales: {
+						x: {
+							beginAtZero: true,
+							max: 100
+						}
+					}
+				}
+			});
+
+			var doneCount = @ViewBag.DoneCount;
+			var notDoneCount = @ViewBag.NotDoneCount;
+
+			new Chart(document.getElementById('todoChart'), {
+				type: 'doughnut',
+				data: {
+					labels: ['Tamamlandı', 'Bekliyor'],
+					datasets: [{
+						data: [doneCount, notDoneCount]
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false
+				}
+			});
+		</script>
+	</div>
+</div>
+
